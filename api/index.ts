@@ -35,7 +35,6 @@ if (typeof (globalThis as any).Path2D === 'undefined') {
 }
 
 // NOTE: In-memory storage — resets on Vercel cold start.
-// For persistence, replace with a database (e.g. Vercel KV, PlanetScale).
 const formStore = new Map<string, { form: any; createdAt: string }>();
 const responseStore = new Map<string, any[]>();
 
@@ -122,7 +121,7 @@ app.post('/api/extract-text', upload.single('file'), async (req, res, next) => {
 
     try {
       const { parse } = await import('@clazic/kordoc');
-      const parseResult = await parse(filePath, { format: 'markdown', silent: true });
+      const parseResult = await parse(filePath, { silent: true }); // format 옵션 제거
 
       if (parseResult && (parseResult as any).success && (parseResult as any).blocks) {
         let currentPage = 1;
