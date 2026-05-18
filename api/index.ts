@@ -121,7 +121,7 @@ app.post('/api/extract-text', upload.single('file'), async (req, res, next) => {
 
     try {
       const { parse } = await import('@clazic/kordoc');
-      const parseResult = await parse(filePath, { silent: true }); // format 옵션 제거
+      const parseResult = await parse(filePath, { silent: true } as any);
 
       if (parseResult && (parseResult as any).success && (parseResult as any).blocks) {
         let currentPage = 1;
